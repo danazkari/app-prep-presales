@@ -5,6 +5,7 @@ export const GET_PRODUCTS = gql`
     products {
       id
       name
+      remainingStock
       picture {
         publicUrl
       }

@@ -32,12 +32,13 @@ import { Receipt } from '@mui/icons-material';
 
 // Types
 interface Product {
-  id: string;
-  name: string;
+  id: string
+  name: string
+  remainingStock: number
   picture: {
     publicUrl: string
-  };
-  price: number;
+  }
+  price: number
 }
 
 interface CartItem {
@@ -63,7 +64,7 @@ const App: React.FC = () => {
   const [ createPurchase, { data: createdPurchase, loading: loadingPurchaseCreation } ] = useMutation(CREATE_PURCHASE)
   let products: Product[] = []
   if (!loading && !error) {
-    products = getProductsData?.products
+    products = getProductsData?.products.filter((product: Product) => product.remainingStock > 0)
   }
   const storedCart = JSON.parse(localStorage.getItem('cart') || '[]')
   const [cart, setCart] = useState<CartItem[]>(storedCart)
@@ -106,11 +107,15 @@ const App: React.FC = () => {
       const existing = prev.find((item) => item.product.id === product.id);
       let cart = [...prev]
       if (existing) {
-        cart = prev.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
+        const canBeAdded = product.remainingStock >= existing.quantity + 1
+        console.log(product.remainingStock)
+        if (canBeAdded) {
+          cart = prev.map((item) =>
+            item.product.id === product.id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          );
+        }
       } else {
         cart = [...prev, { product, quantity: 1 }];
       }
