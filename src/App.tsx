@@ -161,6 +161,7 @@ const App: React.FC = () => {
           data: {
             student: formData.studentName,
             phoneNumber: formData.phoneNumber,
+            section: formData.section,
             lineItems: {
               create: cart.map((item: CartItem) => ({
                 product: { connect: { id: item.product.id } },
