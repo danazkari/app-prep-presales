@@ -9,8 +9,8 @@ import App from './App.tsx'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: import.meta.env.GRAPHQL_URL || 'http://localhost:3000/api/graphql',
-  // uri: import.meta.env.GRAPHQL_URL || 'https://api-prep-presales-283cd116ffaf.herokuapp.com/api/graphql',
+  // uri: import.meta.env.GRAPHQL_URL || 'http://localhost:3000/api/graphql',
+  uri: import.meta.env.GRAPHQL_URL || 'https://api-prep-presales-283cd116ffaf.herokuapp.com/api/graphql',
   cache: new InMemoryCache(),
 })
 

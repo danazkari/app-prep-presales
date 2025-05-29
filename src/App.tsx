@@ -202,33 +202,29 @@ const App: React.FC = () => {
       <Grid container spacing={2} sx={{ p: 2, maxWidth: 1200, margin: '0 auto' }}>
         {products.length > 0 && products.map((product: Product) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={product.id}>
-            <Card>
+            <Card sx={{ display: 'flex' }}>
               <CardMedia
                 component="img"
-                height="140"
                 image={product.picture.publicUrl}
                 alt={product.name}
+                sx={{ width: 151, height: 200 }}
               />
-              <CardContent>
-                <Typography sx={{
-                  display: '-webkit-box',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  WebkitBoxOrient: 'vertical',
-                  WebkitLineClamp: 2,
-                  minHeight: '3em'
-                }} gutterBottom variant="h5">
-                  {product.name}
-                </Typography>
-                <Typography>
-                  ₡{product.price.toLocaleString()}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button sx={{ position: 'relative' }} size="small" onClick={() => addToCart(product)}>
-                  { getQuantityInCart(product.id) > 0 ? `Agregar (${getQuantityInCart(product.id)})` : 'Agregar' }
-                </Button>
-              </CardActions>
+              <Box sx={{ display: 'flex', flexDirection: 'column'}}>
+                <CardContent>
+                  <Typography sx={{
+                  }} gutterBottom variant="h6">
+                    {product.name}
+                  </Typography>
+                  <Typography>
+                    ₡{product.price.toLocaleString()}
+                  </Typography>
+                </CardContent>
+                <CardActions sx={{ marginTop: 'auto', display: 'flex', flexDirection: 'row-reverse' }}>
+                  <Button size="small" onClick={() => addToCart(product)}>
+                    { getQuantityInCart(product.id) > 0 ? `Agregar (${getQuantityInCart(product.id)})` : 'Agregar' }
+                  </Button>
+                </CardActions>
+              </Box>
             </Card>
           </Grid>
         ))}
